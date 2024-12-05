@@ -15,7 +15,7 @@ public class ApiController {
     public  final String APPLICATION_JSON = "application/json";
     public  final String CONTENT_TYPE = "Content-Type";
     public  String timerKey = "";
-    public   final Logger log = LogManager.getLogger();
+    public  final Logger log = LogManager.getLogger();
     public  String mapplsUrl = "https://apis.mappls.com/advancedmaps/v1/";
     public  String key = "vs7x51936v8686tw261s47w7w3wxut74";
 
