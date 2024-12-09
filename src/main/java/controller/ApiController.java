@@ -15,7 +15,7 @@ public class ApiController {
     public  final String APPLICATION_JSON = "application/json";
     public  final String CONTENT_TYPE = "Content-Type";
     public  String timerKey = "";
-    public  final Logger log = LogManager.getLogger();
+    public static final Logger log = LogManager.getLogger();
     public  String mapplsUrl = "https://apis.mappls.com/advancedmaps/v1/";
     public  String key = "vs7x51936v8686tw261s47w7w3wxut74";
 
@@ -38,6 +38,28 @@ public class ApiController {
             return response;
         } catch (Exception e) {
             log.error("Exception occurred GET call baseUri: {} pathParam: {}", baseUri, pathParam);
+        }
+        return null;
+    }
+
+    public  Response sendPostRequestWithAuthorization(String baseUri, String pathParam, String header, String payload) {
+        try {
+            log.info("Sending POST request to URI: {}{} \n payload:{}", baseUri, pathParam, payload);
+            EncoderConfig encoderConfig = RestAssured.config().getEncoderConfig()
+                    .appendDefaultContentCharsetToContentTypeIfUndefined(false);
+            RestAssured.config = RestAssured.config().encoderConfig(encoderConfig);
+            new RequestSpecBuilder().build();
+            Response response = RestAssured.given().log().everything(false)
+                    .header(REQUEST_ACCEPT_HEADER, APPLICATION_JSON)
+                    .header(CONTENT_TYPE, APPLICATION_JSON)
+                    .header("Authorization", header)
+                    .body(payload).post(baseUri + pathParam)
+                    .andReturn();
+            System.out.println("----------Response----------");
+            System.out.println(response.getBody().asString());
+            return response;
+        } catch (Exception e) {
+            log.error(POST_EXCEPTION);
         }
         return null;
     }

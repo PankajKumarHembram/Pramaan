@@ -17,7 +17,8 @@ public class Mockserver extends ApiController{
 
     public Response sendPostRequestForSearch( int testId, String searchType) {
         try {
-            log.info("Sending POST request to baseURI: {} pathParam: {} \n payload:{}", SEARCH, PAYLOAD, (Helper.bodyForSearch(flowName,searchType,isUpdateRefundVtd)));
+            log.info("Sending Post Request to Mock Server to get Header and Payload");
+            log.info("Sending POST request to baseURI: {} pathParam: {} \n payload:{}", baseUri, SEARCH, (Helper.bodyForSearch(flowName,searchType,isUpdateRefundVtd)));
 
             EncoderConfig encoderConfig = RestAssured.config().getEncoderConfig()
                     .appendDefaultContentCharsetToContentTypeIfUndefined(false);
